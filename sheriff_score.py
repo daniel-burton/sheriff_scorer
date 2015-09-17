@@ -5,6 +5,7 @@ class PlayerScore(object):
         self.cheese = 0
         self.chicken = 0
         self.apple = 0
+        self.gold_coins = 0 #actual gold coin tokens
         self.final_score = 0
         self.contraband = 0
         self.name = name.upper()
@@ -16,7 +17,7 @@ class PlayerScore(object):
         self.chicken = self.chicken * 4
         self.apple = self.apple * 2
         self.final_score = self.bread + self.bonus +  self.cheese \
-        				 + self.chicken + self.apple + self.contraband
+        				 + self.chicken + self.apple + self.contraband + self.gold_coins
         return self.final_score #make sure this function is not called more than once. Add a way to ensure this?
 
 def reward(players, good):
@@ -43,6 +44,7 @@ for player in players: #get scores in each category for each player object
     player.cheese = int(input('How many cheese wheels did {} get? '.format(player.name)))
     if len(players) > 3: #bread is only included if there are more than 3 players
         player.bread = int(input('How many loaves of bread did {} get? '.format(player.name)))
+    player.gold_coins = int(input('How many gold coins does {} have? '.format(player.name)))
     player.contraband = int(input('Shhh... what is {}\'s contraband score? '.format(player.name)))
 
 
@@ -66,7 +68,7 @@ while True: #allow lookup of player score breakdown
 	print('\nScore for {}.\n Gold Pieces from: \n'.format(person.name))
 	if len(players) > 3:
 		print('BREAD: {}.\n'.format(person.bread))
-	for good in ['chicken', 'apple', 'cheese', 'contraband', 'bonus']: #see, this is why a list of used goods would help
+	for good in ['chicken', 'apple', 'cheese', 'contraband', 'gold coins', 'bonus']: #see, this is why a list of used goods would help
 		print('{}s: {}.\n'.format(good.upper(), getattr(person, good)))
 	
 	
