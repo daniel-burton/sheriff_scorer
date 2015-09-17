@@ -1,5 +1,5 @@
 # sheriff_scorer
-Calculates final scores for the game Sheriff of Nottingham. Practice for object-oriented programming, sorting with keys. Having one weird issue where comments I tried to add will not "push"...
+Calculates final scores for the game Sheriff of Nottingham. Practice for object-oriented programming, sorting with keys.
 
 In this game, players attempt to sneak goods and contraband past the "sheriff." The player with the most
 gold at the end of the game wins. Each good type is worth a different amount of gold, and there are also bonuses given to the
