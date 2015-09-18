@@ -39,7 +39,7 @@ def reward(players, good):
 
 players = [] # empty list of all player objects
 
-gold_values = {'apple':2, 'bread':3, 'cheese':3, 'chicken':4,}
+gold_values = {'apple':2,'bread':3,'cheese':3,'chicken':4,'contraband':1,'bonus':1, 'gold_coin':1}
 
 while True: #this is kind of ugly?
     next_player = input("Next player name (or none to end): ")
@@ -69,7 +69,7 @@ print('\n\n{} is the winner!'.format(players[0].name))
 
 while True: #allow lookup of player score breakdown
     lookup = input("\n\nPlayer whose score breakdown you wish to view: ").upper()
-	if lookup not in [score.name for score in players]:
+    if lookup not in [score.name for score in players]:
         print("Try again, that isn't a player.\n")
         continue #returns to beginning of while statement
     person = next(x for x in players if x.name == lookup) #I already forget what next() does? look into this.
