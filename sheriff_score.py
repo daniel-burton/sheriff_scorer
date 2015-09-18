@@ -1,3 +1,13 @@
+"""this program creates a "player score" object for each
+player (from an interactive text prompt) and then gets the 
+scores in each category for each player. It then calculates the
+bonuses in each category (1st and 2nd place in each "good type"
+get a bonus), announces the king and queen of each good type,
+and then announces the winner. User can then look up individual player
+scores and view score breakdown for that player."""
+
+
+
 class PlayerScore(object):
     #object for each player's score. Maybe there's an easier way?
     def __init__(self, name):
