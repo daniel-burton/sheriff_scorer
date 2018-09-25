@@ -1,5 +1,5 @@
 # sheriff_scorer
-Calculates final scores for the game Sheriff of Nottingham. Practice for object-oriented programming, sorting with keys.
+Calculates final scores for the game Sheriff of Nottingham. Practice for object-oriented programming and creating a very simple database.
 
 In this game, players attempt to sneak goods and contraband past the "sheriff." The player with the most
 gold at the end of the game wins. Each good type is worth a different amount of gold, and there are also bonuses given to the
