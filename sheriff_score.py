@@ -23,12 +23,12 @@ class PlayerScore(object):
         """recalculate the total score, accounting for different gold value
         for each good type"""
         # each of these calculates gold value of the good
-        bread = self.bread * gold_values['bread']
-        cheese = self.cheese * gold_values['cheese']
-        chicken = self.chicken * gold_values['chicken']
-        apple = self.apple * gold_values['apple']
-        self.final_score = (bread + self.bonus + cheese
-                            + chicken + apple + self.contraband
+        self.bread = self.bread * gold_values['bread']
+        self.cheese = self.cheese * gold_values['cheese']
+        self.chicken = self.chicken * gold_values['chicken']
+        self.apple = self.apple * gold_values['apple']
+        self.final_score = (self.bread + self.bonus + self.cheese
+                            + self.chicken + self.apple + self.contraband
                             + self.gold_coin)
         return self.final_score
 
@@ -100,4 +100,4 @@ if __name__ == "__main__":
         for item in ['chicken', 'apple', 'cheese', 'contraband', 'gold_coin',
                      'bonus']:
             print('{}: {}.\n'.format(item.upper(),
-                                     gold_values[item] * getattr(person, item)))
+                                     getattr(person, item)))
