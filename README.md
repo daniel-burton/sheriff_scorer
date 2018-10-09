@@ -11,3 +11,4 @@ The user can request a score breakdown for each player and view that player's sc
 To do: 
 * should the trade goods have a class, or just be dictionaries?
 * the player_score objects are stored in a list with no names. Would giving them names make the program clearer?
+* Just realized there's no need for the total() function, why not just multiply each type of good by the gold amount as they are collected.
