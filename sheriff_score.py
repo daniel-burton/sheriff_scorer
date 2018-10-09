@@ -41,9 +41,11 @@ def reward(players, good):
     players = sorted(players, key=lambda x: getattr(x, good, 0))
     players[-1].bonus += king  # top player is king, 2nd place is queen
     players[-2].bonus += queen
-    print("{} is the {} king, {} is the queen.".format(players[-1].name,
-                                                       good,
-                                                       players[-2].name))
+    if good not in ['contraband', 'gold']:
+        print("{} is the {} champ ♔, {} is the runner up ♕.".format(
+                                                             players[-1].name,
+                                                             good,
+                                                             players[-2].name))
 
 def ask_score(player, good):
     """create the string to ask the score for each good to eliminate
@@ -54,12 +56,11 @@ def ask_score(player, good):
     score = int(input("How {} did {} get? ".format(ask[good], player.name)))
     return score
 
-players = []  # empty list of all player objects
-
 gold_values = {'apple': 2, 'bread': 3, 'cheese': 3, 'chicken': 4,
                'contraband': 1, 'bonus': 1, 'gold_coin': 1}
 
 if __name__ == "__main__":
+    players = []
     while True:
         next_player = input("Next player name (or none to end): ")
         if next_player.lower() == "none" or next_player.lower() == "":
@@ -72,17 +73,20 @@ if __name__ == "__main__":
         goods.append('bread')
 
     for player in players:  # get score in each category for each player object
+        print('\n-- ', player.name, ' --')
         for item in goods:
-            player.item = ask_score(player, item)
+            setattr(player, item, ask_score(player, item))
 
-    print('\n\n')
+    print('\n')
 
     for item in goods:
         reward(players, item)
 
     players.sort(key=lambda x: x.total(), reverse=True)
     # determine overall winner, simultaneously calling .total() on each
-    print('\n\n{} is the winner!'.format(players[0].name))
+    print('**************************************************')
+    print('{} is the winner!'.format(players[0].name))
+    print('**************************************************')
 
     while True:  # allow lookup of player score breakdown
         lookup = input(("\n\nPlayer whose score breakdown you wish to view"
@@ -94,10 +98,14 @@ if __name__ == "__main__":
             print("Try again, that isn't a player.\n")
             continue  # returns to beginning of while statement
         person = next(x for x in players if x.name == lookup)
-        print('\nScore for {}.\nGold Pieces from: \n'.format(person.name))
+        # this is needed because the objects don't have names
+        print('\n---------------------------------------------------')
+        print(('\n\nScore for {}.\n\n'
+              'Gold Pieces earned from: \n'.format(person.name)))
         if len(players) > 3:
             print('BREAD: {}.\n'.format(person.bread * gold_values['bread']))
         for item in ['chicken', 'apple', 'cheese', 'contraband', 'gold_coin',
                      'bonus']:
             print('{}: {}.\n'.format(item.upper(),
                                      getattr(person, item)))
+        print('\n* * Final Score: ', getattr(person, "final_score"), " * *")
