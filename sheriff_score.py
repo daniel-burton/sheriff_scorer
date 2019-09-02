@@ -27,6 +27,7 @@ class PlayerScore(object):
         self.cheese = self.cheese * gold_values['cheese']
         self.chicken = self.chicken * gold_values['chicken']
         self.apple = self.apple * gold_values['apple']
+        self.gold_coin = self.gold_coin * gold_values['gold_coin']
         self.final_score = (self.bread + self.bonus + self.cheese
                             + self.chicken + self.apple + self.contraband
                             + self.gold_coin)
@@ -34,14 +35,14 @@ class PlayerScore(object):
 
 def reward(players, good):
     # give prizes for 1st and 2nd place for each good
-    prizes = {'chicken': (20, 10), 'apple': (10, 5),
-              'bread': (10, 5), 'cheese': (10, 5),
-              'contraband': (0, 0), 'gold': (0, 0)}
+    prizes = {'chicken': (10, 5), 'apple': (20, 10),
+              'bread': (15, 10), 'cheese': (15, 10),
+              'contraband': (0, 0), 'gold_coin': (0, 0)}
     king, queen = prizes[good]
     players = sorted(players, key=lambda x: getattr(x, good, 0))
     players[-1].bonus += king  # top player is king, 2nd place is queen
     players[-2].bonus += queen
-    if good not in ['contraband', 'gold']:
+    if good not in ['contraband', 'gold_coin']:
         print("{} is the {} champ ♔, {} is the runner up ♕.".format(
                                                              players[-1].name,
                                                              good,
@@ -52,7 +53,7 @@ def ask_score(player, good):
     duplicate code"""
     ask = {"apple": "many apples", "bread": "many loaves of bread",
            "cheese": "many wheels of cheese", "chicken": "many chickens",
-           "contraband": "much contraband", "gold": "many gold coins"}
+           "contraband": "much money in contraband", "gold_coin": "many gold coins"}
     score = int(input("How {} did {} get? ".format(ask[good], player.name)))
     return score
 
@@ -68,7 +69,7 @@ if __name__ == "__main__":
         players.append(PlayerScore(next_player))
         # add initialized score object to list of players
 
-    goods = ['apple', 'cheese', 'chicken', 'contraband', 'gold']
+    goods = ['apple', 'cheese', 'chicken', 'contraband', 'gold_coin']
     if len(players) > 3:
         goods.append('bread')
 
